@@ -4,14 +4,12 @@
 
 
 
-var topics = ["ferrari","toyota","lamborghini"];
-
-
-
+var topics = ["Ferrari","Toyota","Lamborghini"];
 // Performing our AJAX GET request
 
 
 function getData (){
+
 
     $("#carpics").empty();
     var topic = $(this).attr("data-name");
@@ -29,22 +27,42 @@ function getData (){
 
             for (var j=0; j<source.length; j++){
 
-                var imgUrl = source[j].images.fixed_width.url;
-                console.log(imgUrl);
+                var imgUrlAnimated = source[j].images.fixed_width.url;
+                var imgUrlStill = source[j].images.fixed_width_still.url;
+                var rating = $("<p>").html("Rating:"+" "+source[j].rating);
 
-                var imgHolder = $("<img>").attr("src",imgUrl);
-                console.log(imgHolder);
+                var imgHolder = $("<div>").attr("class","picAndtext");
+                
+                imgHolder.append($("<img>").attr({"src":imgUrlStill,"data-state":"still","data-still-url":imgUrlStill,"class":"clickme","data-animated-url":imgUrlAnimated}));
+
+                imgHolder.prepend(rating);
+
 
                 $("#carpics").append(imgHolder);
+
                 
             }
             createButtons();
 
+            $(".clickme").on("click", function(event){
+    
+                event.preventDefault();
+                var currentState = $(this).attr("data-state");
+            
+                if(currentState === "still"){
+                    $(this).attr("src",$(this).attr("data-animated-url"))
+                    $(this).attr("data-state","data-animated")
+            
+                }else{
+                    $(this).attr("src",$(this).attr("data-still-url"));
+                    $(this).attr("data-state","still");
+            
+            
+                } 
+            });
+
         });
       }
-
-
-
    
 
 function createButtons(){
@@ -53,7 +71,7 @@ function createButtons(){
 
         for(var i=0; i<topics.length; i++){
 
-            var button = $("<button>").attr({"class":"car","data-name":topics[i]});
+            var button = $("<button>").attr({"class":"car btn btn-primary","data-name":topics[i], "type":button});
             button.text(topics[i]);
 
             $("#cars").append(button);
@@ -61,13 +79,18 @@ function createButtons(){
         }
 };
 
-function userInput(){
+$("#submitBrand").on("click", function(event){
+
+    event.preventDefault();
 
     var newCar = $("#brand-input").val().trim();
-    
 
-}
+    topics.push(newCar);
+    $("#brand-input").val("");
 
+    createButtons();
+
+}) 
 
 
 
@@ -75,5 +98,7 @@ function userInput(){
 $(document).on("click", ".car", getData);
 
 createButtons();
+
+
 
 

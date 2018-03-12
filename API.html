@@ -6,20 +6,37 @@
     <title>World Cup Trivia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-    <div id="cars"></div>
-    <div id="carpics"></div>
+    <div class="container">
+        <div class="row top">
+            <div class="col-xs-12">
+                <div id="cars"></div>
+            </div>
 
-    <form id="animal-form">
-        <label for="cars-input">Type in Your Car Brand</label>
-        <input type="text" id="brand-input"></input>
-        <input type="submit" id="summitBrand" value="submit">
-    </form>
-       
+            
+        </div>  
+
+       <div class="row bottom">
+            <div class="col">
+                <div id="carpics"></div>
+            </div>
+            <div class="col">
+                    
+                <form id="cars-form">
+                        <label for="cars-input">Car Brand</label>
+                        <input type="text" id="brand-input"></input>
+                        <input type="submit" id="submitBrand" value="Submit">
+                </form>
+                    
+            </div>
+       </div>
+    
+    </div>
  
     <script src="https://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="app.js"></script>
